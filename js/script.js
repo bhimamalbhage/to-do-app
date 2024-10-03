@@ -1,33 +1,23 @@
+function newItem() {
+  let inputValue = $('#input').val();
+  let li = $('<li></li>').text(inputValue);
 
-function newItem(){
+  if (inputValue === "") {
+    alert("You must write something!");
+  } else {
+    $('#list').append(li);
+  }
 
-       let li = document.createElement("li");
-       let inputValue = document.getElementById("input").value;
-       let text = document.createTextNode(inputValue);
-       li.appendChild(text);
-    
-       if (inputValue === '') {
-         alert("You must write something!");
-       } else {
-         let list = document.querySelector('#list');
-         list.appendChild(li);
-       }
-    
-       function crossOut() {
-             li.classList.toggle("strike");
-         }
-    
-         li.addEventListener("dblclick",crossOut);
-    
-       let crossOutButton = document.createElement("crossOutButton");
-         crossOutButton.appendChild(document.createTextNode("X"));
-         li.appendChild(crossOutButton);
-    
-         crossOutButton.addEventListener("click", deleteListItem);
+  li.on('dblclick', function() {
+    li.toggleClass('strike');
+  });
 
-       function deleteListItem(){
-             li.classList.add("delete")
-         }
-       $('#list').sortable();
-    
+  let crossOutButton = $('<crossOutButton></crossOutButton>').text('X');
+  li.append(crossOutButton);
+
+  crossOutButton.on('click', function() {
+    li.addClass('delete');
+  });
+
+  $('#list').sortable();
 }
